@@ -13,12 +13,24 @@ document.getElementById("generate").addEventListener("click", function () {
 
     div.appendChild(span);
 
+    div.addEventListener("click", function () {
+      navigator.clipboard.writeText(color);
+      showNotification("Copied " + color);
+    });
+
     palette.appendChild(div);
   }
 });
 
 function showNotification(message) {
   /* Code to show notification goes here */
-  let div = document.createElement("div");
-  div.classList.add("notification");
+  let notification = document.createElement("div");
+  notification.className = "notification";
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  notification.style.display = "block";
+  setTimeout(function () {
+    notification.style.display = "none";
+    document.body.removeChild(notification);
+  }, 2000);
 }
